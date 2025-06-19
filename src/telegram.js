@@ -1,23 +1,21 @@
 // src/telegram.js
-export const tg = window.Telegram.WebApp;
-
 export const getUserData = () => {
+  const tg = window.Telegram?.WebApp;
+
   if (!tg) {
     console.error("Telegram WebApp API не найден");
     return null;
   }
 
-  tg.ready();
+  tg.ready(); // Инициализируем WebApp API
 
   // Данные пользователя из initDataUnsafe
   const user = tg.initDataUnsafe?.user;
 
   if (!user) {
-    console.error("Пользовательские данные недоступны.");
+    console.error("Информация о пользователе недоступна.");
     return null;
   }
 
   return user;
 };
-
-export const user = getUserData();

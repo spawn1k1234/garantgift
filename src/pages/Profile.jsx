@@ -5,9 +5,9 @@ export default function Profile() {
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
-    const user = getUserData();
+    const user = getUserData(); // Получаем данные пользователя
     if (user) {
-      setUserData(user);
+      setUserData(user); // Сохраняем данные в состояние
     }
   }, []);
 
