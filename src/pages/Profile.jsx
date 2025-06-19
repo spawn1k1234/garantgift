@@ -1,6 +1,16 @@
 import { user } from "../telegram";
 
 export default function Profile() {
+  if (!user || !user.id) {
+    return (
+      <div className="flex items-center justify-center h-screen text-center p-4">
+        <p>
+          Информация недоступна. Пожалуйста, откройте приложение через Telegram.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       {user.photo_url && (
