@@ -1,37 +1,48 @@
-import { user } from "../telegram";
+import { useEffect, useState } from "react";
+import { getUserData } from "../telegram";
 
 export default function Profile() {
-  if (!user || !user.id) {
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    const user = getUserData();
+    if (user) {
+      setUserData(user);
+    }
+  }, []);
+
+  if (!userData) {
     return (
-      <div className="flex items-center justify-center h-screen text-center p-4">
-        <p>
-          Информация недоступна. Пожалуйста, откройте приложение через Telegram.
-        </p>
+      <div className="flex items-center justify-center h-screen">
+        <h1>
+          Данные пользователя не доступны. Пожалуйста, откройте приложение через
+          Telegram.
+        </h1>
       </div>
     );
   }
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
-      {user.photo_url && (
+      {userData.photo_url && (
         <img
-          src={user.photo_url}
+          src={userData.photo_url}
           alt="avatar"
           className="w-24 h-24 rounded-full mb-4"
         />
       )}
       <p>
-        <strong>Ник:</strong> @{user.username || "не указано"}
+        <strong>Ник:</strong> @{userData.username || "не указано"}
       </p>
       <p>
-        <strong>Имя:</strong> {user.first_name} {user.last_name || ""}
+        <strong>Имя:</strong> {userData.first_name} {userData.last_name || ""}
       </p>
       <p>
-        <strong>Телеграм ID:</strong> {user.id}
+        <strong>Телеграм ID:</strong> {userData.id}
       </p>
-      {user.phone_number && (
+      {userData.phone_number && (
         <p>
-          <strong>Телефон:</strong> {user.phone_number}
+          <strong>Телефон:</strong> {userData.phone_number}
         </p>
       )}
     </div>

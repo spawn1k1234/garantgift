@@ -8,8 +8,6 @@ export default function App() {
   return (
     <BrowserRouter>
       <div className="pb-16">
-        {" "}
-        {/* Оставим место под нижнюю навигацию */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
